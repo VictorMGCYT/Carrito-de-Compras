@@ -1,22 +1,22 @@
 
-import { useMemo } from "react";
 
-// un componente es una función
-
-function Header({cart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart}) {
+function Header({cart, removeFromCart, increaseQuantity, decreaseQuantity, clearCart, isEmpty, calcularTotal}) {
     
 
-    // con esto sacamos un poco la lógica para mostrar o no algo dentro del JSX
-    // useMemo hace que el render solo se ejecute si algo cambió en la dependencia
-    // En este caso si algo cambio en nuestro carrito
-    const isEmpty = useMemo( () =>   cart.length === 0, [cart])
-
-    const calcularTotal = useMemo( () =>{
-        return cart.reduce( (total, item) => {
-            return total + (item.price * item.quantity)
-        }, 0)
-    }, [cart]
-    )
+    // ** En este caso ahora como pasamos estas funciones a nuestro hook no lo podemos importar directamente Aquí
+    // ** Ya que eso genera algunos problemas, en vez de eso solo lo importamos en el padre y pasamos las 
+    // ** funciones via props
+    // ** Ya que al instanciarlo multiples veces va generando multiples objetos, y no queremos eso, queremos
+    // todo que todo esté en un solo lugar
+    // const isEmpty = useMemo( () =>   cart.length === 0, [cart])
+    
+    //     const calcularTotal = useMemo( () =>{
+    //         return cart.reduce( (total, item) => {
+    //             return total + (item.price * item.quantity)
+    //         }, 0)
+    //     }, [cart]
+    //     )
+    
     
 
     return (
